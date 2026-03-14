@@ -4,6 +4,10 @@
 
 This folder is the GitHub-ready source export for the supported public feature set.
 
+## Download
+
+- Nexus Mods: https://www.nexusmods.com/sleepingdogsdefinitiveedition/mods/148
+
 ## Working feature set
 
 - automatic support for both the researched `1.0` executable and the latest Steam executable
