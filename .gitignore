@@ -1,0 +1,14 @@
+build/
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+*.log
+*.dmp
+*.pdb
+*.ipdb
+*.iobj
+*.obj
+*.tlog/
+*.ini
+!SPatch.ini
