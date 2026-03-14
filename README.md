@@ -10,7 +10,7 @@ This folder is the GitHub-ready source export for the supported public feature s
 
 ## Working feature set
 
-- automatic support for both the researched `1.0` executable and the latest Steam executable
+- automatic support for both the `1.0` executable and the latest Steam executable
 - cutscene timing fixes for real `60 fps` scene playback
 - custom `SMAA` runtime with stock AA bypass
 - `ACES` tonemapping integration
@@ -25,19 +25,6 @@ This folder is the GitHub-ready source export for the supported public feature s
   - rumble
 - bruising / blood restore for normal NPC melee hits
 - build/version guard and minidump support
-
-## Not part of the supported public feature set
-
-These research branches are intentionally not part of the shipped feature set:
-
-- cut-content forcing / probing
-- wetness restoration
-- reflection restoration
-- shadow-resolution experiments
-- worker-cap experiments
-- traffic-throttle disable experiments
-- legacy AA probe/debug branches
-- other reverse-engineering probes
 
 ## Build
 
@@ -62,4 +49,3 @@ Output:
 ## Notes
 
 - `Release` defaults to the public/final build surface.
-- The generated `SPatch.ini` is release-style and does not expose unfinished research toggles.
