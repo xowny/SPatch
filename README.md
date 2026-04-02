@@ -1,5 +1,8 @@
 # SPatch
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+
 `SPatch` is an `.asi` mod for `Sleeping Dogs: Definitive Edition`.
 
 ## Download
