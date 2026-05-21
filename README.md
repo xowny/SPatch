@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 
-`SPatch` is an `.asi` mod for `Sleeping Dogs: Definitive Edition`.
+`SPatch` is an `.asi` mod for `Sleeping Dogs: Definitive Edition` that focus on fixing oversights, restoring broken features, and improving the PC version overall.
 
 ## Download
 
