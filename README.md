@@ -14,7 +14,7 @@
 - automatic support for both the `1.0` executable and the latest Steam executable
 - cutscene timing fixes for real `60 fps` scene playback
 - custom `SMAA` runtime with stock AA bypass
-- `ACES` tonemapping integration
+- `ACES` based tonemapping integration
 - DXGI adapter / VRAM selection fix
 - stock option bootstrap overrides:
   - low-resolution buffer
@@ -45,8 +45,4 @@ Build example:
 Output:
 
 - `build\Release\SPatch.asi`
-- `SPatch.ini` in the repo root is a sample public-facing config
-
-## Notes
-
-- `Release` defaults to the public/final build surface.
+- `SPatch.ini`
