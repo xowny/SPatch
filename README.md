@@ -5,6 +5,8 @@
 
 `SPatch` is an `.asi` mod for `Sleeping Dogs: Definitive Edition` that focus on fixing oversights, restoring broken features, and improving the PC version overall.
 
+![image alt](https://github.com/xowny/SPatch/blob/main/cG6vs4z.png?raw=true)
+
 ## Download
 
 - Nexus Mods: https://www.nexusmods.com/sleepingdogsdefinitiveedition/mods/148
