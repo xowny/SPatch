@@ -11,7 +11,7 @@
 
 - Nexus Mods: https://www.nexusmods.com/sleepingdogsdefinitiveedition/mods/148
 
-## Working feature set
+## Features
 
 - automatic support for both the `1.0` executable and the latest Steam executable
 - cutscene timing fixes for real `60 fps` scene playback
