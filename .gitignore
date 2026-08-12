@@ -8,6 +8,7 @@ AGENTS.md
 .learnings/
 .serena/
 .ruff_cache/
+docs/plans/*modernization-roadmap.md
 *.user
 *.suo
 *.VC.db
