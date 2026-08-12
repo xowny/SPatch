@@ -1,7 +1,7 @@
 # SPatch
 
-SPatch is an ASI patch for **Sleeping Dogs: Definitive Edition**.
-It applies executable fixes, timing and input corrections,, SMAA, diagnostics, and configuration migration, among other features.
+SPatch is an ASI mod for **Sleeping Dogs: Definitive Edition**.
+It features executable fixes, timing and input corrections,, SMAA, diagnostics, and configuration migration, among other features.
 
 This repository contains SPatch source code only.
 
