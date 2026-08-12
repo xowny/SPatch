@@ -2,6 +2,7 @@ build/
 artifacts/
 .tmp/
 .qlty/
+AGENTS.md
 .agents/
 .hermes/
 .learnings/
