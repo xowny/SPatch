@@ -77,6 +77,4 @@ Normal builds write only under `build\`; release packaging writes under
 ## Documentation
 
 - [Texture-filtering paired analysis](docs/2026-08-10-texture-filtering-paired-analysis.md)
-- [Main-pool crash analysis](docs/2026-08-08-main-pool-ringbuffer-crash-analysis.md)
-- [Modernization roadmap](docs/plans/2026-03-31-spatch-modernization-roadmap.md)
 - [Changelog](CHANGELOG.md)
