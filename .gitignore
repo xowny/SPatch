@@ -9,6 +9,7 @@ AGENTS.md
 .serena/
 .ruff_cache/
 docs/plans/*modernization-roadmap.md
+docs/*crash-analysis.md
 *.user
 *.suo
 *.VC.db
