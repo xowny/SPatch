@@ -1,7 +1,9 @@
 #pragma once
 
 // SMAA (Subpixel Morphological Antialiasing) - embedded shader source.
-// Generated from third_party/smaa/SMAA.hlsl as chunked raw strings for MSVC.
+// Generated from third_party/smaa/SMAA.hlsl at upstream revision
+// 71c806a838bdd7d517df19192a20f0c61b3ca29d as chunked raw strings for MSVC.
+// tools/Verify-SmaaSource.ps1 enforces the vendor hashes and reconstruction.
 // Original: http://www.iryoku.com/smaa/  (Jorge Jimenez et al., 2013)
 
 #include <array>
@@ -63,7 +65,7 @@ inline constexpr std::array<std::string_view, 9> kSmaaShaderSourceChunks = {
  *
  * The shader has three passes, chained together as follows:
  *
- *                           |input|------------------�
+ *                           |input|------------------·
  *                              v                     |
  *                    [ SMAA*EdgeDetection ]          |
  *                              v                     |
@@ -73,7 +75,7 @@ inline constexpr std::array<std::string_view, 9> kSmaaShaderSourceChunks = {
  *                              v                     |
  *                          |blendTex|                |
  *                              v                     |
- *                [ SMAANeighborhoodBlending ] <------�
+ *                [ SMAANeighborhoodBlending ] <------·
  *                              v
  *                           |output|
  *

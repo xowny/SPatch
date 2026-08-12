@@ -1,4 +1,11 @@
 build/
+artifacts/
+.tmp/
+.agents/
+.hermes/
+.learnings/
+.serena/
+.ruff_cache/
 *.user
 *.suo
 *.VC.db

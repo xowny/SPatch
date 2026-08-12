@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{B8A1A13B-9A41-45C5-8C54-FEEB42E5F958}</ProjectGuid>
+    <RootNamespace>SPatchTests</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SPatchTests</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <FinalRelease Condition="'$(FinalRelease)'==''">false</FinalRelease>
+    <OutDir>$(ProjectDir)build\tests\$(Configuration)\$(FinalRelease)\</OutDir>
+    <IntDir>$(ProjectDir)build\obj-tests\$(Configuration)\$(FinalRelease)\</IntDir>
+    <TargetName>SPatchTests</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Advapi32.lib;Crypt32.lib;User32.lib;DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CONSOLE;WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(FinalRelease)'=='true'">_CONSOLE;WIN32_LEAN_AND_MEAN;NOMINMAX;SPATCH_FINAL_RELEASE=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <WholeProgramOptimization Condition="'$(FinalRelease)'=='true'">true</WholeProgramOptimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Advapi32.lib;Crypt32.lib;User32.lib;DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\AverageWindowPolicy.h" />
+    <ClInclude Include="src\CharacterEyeFix.h" />
+    <ClInclude Include="src\CharacterWetnessPolicy.h" />
+    <ClCompile Include="src\CharacterEyeFix.cpp" />
+    <ClCompile Include="src\BootstrapPolicy.cpp" />
+    <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\DisplaySettings.cpp" />
+    <ClCompile Include="src\EngineFixes.cpp" />
+    <ClCompile Include="src\HooksSummary.cpp" />
+    <ClCompile Include="src\HookTargetGuard.cpp" />
+    <ClCompile Include="src\Logger.cpp" />
+    <ClCompile Include="src\PedestrianTiming.cpp" />
+    <ClCompile Include="src\RuntimePatch.cpp" />
+    <ClCompile Include="src\VersionGuard.cpp" />
+    <ClCompile Include="tests\ConfigVersionTests.cpp" />
+    <ClCompile Include="tests\HookTargetGuardTests.cpp" />
+    <ClCompile Include="tests\TextureFilteringPolicyTests.cpp" />
+    <ClCompile Include="tests\VehicleCameraPolicyTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ArchiveEntryPolicy.h" />
+    <ClInclude Include="src\BigFileIndexPolicy.h" />
+    <ClInclude Include="src\BootstrapPolicy.h" />
+    <ClInclude Include="src\ChunkStreamPolicy.h" />
+    <ClInclude Include="src\BuildInfo.h" />
+    <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\CutContentProbe.h" />
+    <ClInclude Include="src\DisplaySettings.h" />
+    <ClInclude Include="src\EngineFixes.h" />
+    <ClInclude Include="src\FogRestorationPolicy.h" />
+    <ClInclude Include="src\HooksSummary.h" />
+    <ClInclude Include="src\HookTargetGuard.h" />
+    <ClInclude Include="src\InputPolicy.h" />
+    <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\NisActorProbe.h" />
+    <ClInclude Include="src\PedestrianTiming.h" />
+    <ClInclude Include="src\QFileIoPolicy.h" />
+    <ClInclude Include="src\QcmpPolicy.h" />
+    <ClInclude Include="src\RuntimePatch.h" />
+    <ClInclude Include="src\SystemLibrary.h" />
+    <ClInclude Include="src\TextureFilteringPolicy.h" />
+    <ClInclude Include="src\VehicleCameraPolicy.h" />
+    <ClInclude Include="src\VersionGuard.h" />
+    <ClInclude Include="tests\HookTargetGuardTests.h" />
+  </ItemGroup>
+  <Target Name="ValidateFinalReleaseRequest"
+          BeforeTargets="PrepareForBuild"
+          Condition="'$(FinalRelease)'=='true'">
+    <Error Condition="'$(Configuration)'!='Release' or '$(Platform)'!='x64'"
+           Text="SPatchTests FinalRelease requires Configuration=Release and Platform=x64." />
+  </Target>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

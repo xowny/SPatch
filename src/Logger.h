@@ -6,7 +6,7 @@
 
 namespace spatch::log {
 
-bool Initialize(const std::filesystem::path& path);
+bool Initialize(const std::filesystem::path& path, bool enabled = true);
 void Shutdown();
 
 void Info(std::string_view message);

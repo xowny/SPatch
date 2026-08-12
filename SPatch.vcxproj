@@ -22,41 +22,55 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup>
-    <OutDir>$(ProjectDir)build\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)build\obj\$(Configuration)\</IntDir>
+    <FinalRelease Condition="'$(FinalRelease)'==''">false</FinalRelease>
+    <OutDir Condition="'$(FinalRelease)'=='true'">$(ProjectDir)build\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(FinalRelease)'!='true'">$(ProjectDir)build\$(Configuration)\diagnostic\</OutDir>
+    <IntDir>$(ProjectDir)build\obj\$(Configuration)\$(FinalRelease)\</IntDir>
     <TargetName>SPatch</TargetName>
     <TargetExt>.asi</TargetExt>
-    <FinalRelease Condition="'$(FinalRelease)'==''">true</FinalRelease>
+    <GameDir Condition="'$(GameDir)'==''">C:\Program Files (x86)\Steam\steamapps\common\SleepingDogsDefinitiveEdition\</GameDir>
+    <NormalizedGameDir>$([MSBuild]::EnsureTrailingSlash('$(GameDir)'))</NormalizedGameDir>
+    <AsiLoaderPath Condition="'$(AsiLoaderPath)'==''">$(NormalizedGameDir)dinput8.dll</AsiLoaderPath>
+    <DeployGameArtifacts Condition="'$(DeployGameArtifacts)'==''">false</DeployGameArtifacts>
+    <NormalTestsPath>$(ProjectDir)build\tests\Release\false\SPatchTests.exe</NormalTestsPath>
+    <FinalTestsPath>$(ProjectDir)build\tests\Release\true\SPatchTests.exe</FinalTestsPath>
+    <SPatchFinalBuildInvocationId Condition="'$(SPatchFinalBuildInvocationId)'==''">$([System.Guid]::NewGuid().ToString('N'))</SPatchFinalBuildInvocationId>
+    <SPatchFinalBuildLockToken Condition="'$(SPatchFinalBuildLockToken)'==''">$([System.Guid]::NewGuid().ToString('N'))</SPatchFinalBuildLockToken>
+    <FinalBuildAttestationPath>$(IntDir)SPatch.final-build.$(SPatchFinalBuildInvocationId).attestation</FinalBuildAttestationPath>
+    <MinHookArtifactCommit>d5d8e1d67ddcea89fbef656b85052a5845dd34ee</MinHookArtifactCommit>
+    <MinHookRoot Condition="'$(MinHookRoot)'==''">$(ProjectDir).tmp\SDmodding-MinHook-$(MinHookArtifactCommit)</MinHookRoot>
+    <MinHookOffline Condition="'$(MinHookOffline)'==''">false</MinHookOffline>
+    <ExternalIncludePath>$(MinHookRoot);$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;SPATCH_FINAL_RELEASE=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <PreprocessorDefinitions>_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;SPD_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <ExceptionHandling>Sync</ExceptionHandling>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)external;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>MinHook.lib;Dbghelp.lib;Version.lib;User32.lib;Advapi32.lib;Crypt32.lib;D3D11.lib;DXGI.lib;D3DCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(MinHookRoot)\MinHook.lib;User32.lib;Advapi32.lib;Crypt32.lib;D3D11.lib;DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -66,7 +80,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <PreprocessorDefinitions>_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(FinalRelease)'=='true'">_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;SPATCH_FINAL_RELEASE=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -74,33 +89,179 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>MaxSpeed</Optimization>
+      <WholeProgramOptimization Condition="'$(FinalRelease)'=='true'">true</WholeProgramOptimization>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformation Condition="'$(FinalRelease)'=='true'">None</DebugInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <LinkTimeCodeGeneration Condition="'$(FinalRelease)'=='true'">UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)external;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>MinHook.lib;Dbghelp.lib;Version.lib;User32.lib;Advapi32.lib;Crypt32.lib;D3D11.lib;DXGI.lib;D3DCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation Condition="'$(FinalRelease)'=='true'">false</GenerateDebugInformation>
+      <AdditionalOptions>/Brepro /PDBALTPATH:%_PDB% %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>$(MinHookRoot)\MinHook.lib;User32.lib;Advapi32.lib;Crypt32.lib;D3D11.lib;DXGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\AverageWindowPolicy.h" />
+    <ClInclude Include="src\CharacterEyeFix.h" />
+    <ClInclude Include="src\CharacterSweatPolicy.h" />
+    <ClInclude Include="src\CharacterWetnessPolicy.h" />
+    <ClCompile Include="src\CharacterEyeFix.cpp" />
+    <ClCompile Include="src\BootstrapPolicy.cpp" />
     <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\CutContentProbe.cpp" />
     <ClCompile Include="src\DisplaySettings.cpp" />
+    <ClCompile Include="src\EngineFixes.cpp" />
     <ClCompile Include="src\Hooks.cpp" />
+    <ClCompile Include="src\HooksSummary.cpp" />
+    <ClCompile Include="src\HookTargetGuard.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\PedestrianTiming.cpp" />
+    <ClCompile Include="src\RuntimePatch.cpp" />
     <ClCompile Include="src\SmaaRuntime.cpp" />
     <ClCompile Include="src\VersionGuard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ArchiveEntryPolicy.h" />
+    <ClInclude Include="src\BigFileIndexPolicy.h" />
+    <ClInclude Include="src\BootstrapPolicy.h" />
+    <ClInclude Include="src\ChunkStreamPolicy.h" />
     <ClInclude Include="src\BuildInfo.h" />
     <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\CutContentProbe.h" />
     <ClInclude Include="src\DisplaySettings.h" />
+    <ClInclude Include="src\EngineFixes.h" />
+    <ClInclude Include="src\FogRestorationPolicy.h" />
+    <ClInclude Include="src\FogSlicingPolicy.h" />
     <ClInclude Include="src\Hooks.h" />
+    <ClInclude Include="src\HooksSummary.h" />
+    <ClInclude Include="src\HookTargetGuard.h" />
+    <ClInclude Include="src\InputPolicy.h" />
     <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\NisActorProbe.h" />
+    <ClInclude Include="src\PedestrianTiming.h" />
+    <ClInclude Include="src\QFileIoPolicy.h" />
+    <ClInclude Include="src\QcmpPolicy.h" />
+    <ClInclude Include="src\RuntimePatch.h" />
     <ClInclude Include="src\SmaaRuntime.h" />
+    <ClInclude Include="src\SmaaShaderSource.inl" />
+    <ClInclude Include="src\SystemLibrary.h" />
+    <ClInclude Include="src\TextureFilteringPolicy.h" />
+    <ClInclude Include="src\VehicleCameraPolicy.h" />
     <ClInclude Include="src\VersionGuard.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="third_party\smaa\SMAA.hlsl" />
+    <None Include="third_party\smaa\AreaTex.h" />
+    <None Include="third_party\smaa\SearchTex.h" />
+    <None Include="third_party\smaa\LICENSE.txt" />
+    <None Include="artifacts\release-notices\THIRD_PARTY_NOTICES.md" />
+    <None Include="artifacts\release-notices\licenses\MinHook-BSD-2-Clause.txt" />
+    <None Include="artifacts\release-notices\licenses\SMAA-MIT.txt" />
+    <None Include="artifacts\release-staging\SPatch-default-v*.ini" />
+    <None Include="tools\Build-SPatchRelease.ps1" />
+    <None Include="tools\Deploy-SPatchArtifact.ps1" />
+    <None Include="tools\Test-SPatchReleasePipeline.ps1" />
+    <None Include="tools\Test-SPatchDeployTarget.ps1" />
+    <None Include="tools\Verify-SmaaSource.ps1" />
+  </ItemGroup>
+  <Target Name="ValidateFinalReleaseRequest"
+          BeforeTargets="PrepareForBuild"
+          Condition="'$(FinalRelease)'=='true'">
+    <Error Condition="'$(Configuration)'!='Release' or '$(Platform)'!='x64'"
+           Text="SPatch FinalRelease requires Configuration=Release and Platform=x64." />
+  </Target>
+  <Target Name="ValidateSmaaSource" BeforeTargets="PrepareForBuild">
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\Verify-SmaaSource.ps1&quot;" />
+  </Target>
+  <Target Name="AcquireFinalBuildLock"
+          BeforeTargets="PrepareForBuild"
+          DependsOnTargets="ValidateFinalReleaseRequest"
+          Condition="'$(FinalRelease)'=='true' and '$(Configuration)'=='Release' and '$(Platform)'=='x64'">
+    <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\Build-SPatchRelease.ps1&quot; -BuildLockAction Acquire -LockToken &quot;$(SPatchFinalBuildLockToken)&quot;" />
+  </Target>
+  <Target Name="ValidateDeployRequest"
+          BeforeTargets="PrepareForBuild"
+          DependsOnTargets="ValidateFinalReleaseRequest"
+          Condition="'$(DeployGameArtifacts)'=='true'">
+    <Error Condition="'$(Configuration)'!='Release' or '$(Platform)'!='x64'"
+           Text="SPatch deployment requires Configuration=Release and Platform=x64." />
+    <Error Condition="'$(FinalRelease)'!='true'"
+           Text="SPatch deployment requires FinalRelease=true; diagnostic builds cannot be installed as end-user artifacts." />
+    <Error Condition="!Exists('$(NormalizedGameDir)sdhdship.exe')"
+           Text="SPatch deployment target is not a Sleeping Dogs: Definitive Edition folder: $(GameDir)" />
+    <Error Condition="!Exists('$(AsiLoaderPath)')"
+           Text="SPatch deployment requires an x64 dinput8.dll ASI-loader candidate beside sdhdship.exe: $(AsiLoaderPath)" />
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\Test-SPatchDeployTarget.ps1&quot; -GameExecutablePath &quot;$(NormalizedGameDir)sdhdship.exe&quot; -BuildInfoPath &quot;$(ProjectDir)src\BuildInfo.h&quot; -AsiLoaderPath &quot;$(AsiLoaderPath)&quot;" />
+  </Target>
+  <Target Name="VerifyBeforeDeploy">
+    <Error Text="VerifyBeforeDeploy is not a public entry point. Invoke Build or Rebuild with Release|x64, FinalRelease=true, and DeployGameArtifacts=true." />
+  </Target>
+  <Target Name="VerifyFinalRelease">
+    <Error Text="VerifyFinalRelease is not a public entry point. Invoke Build or Rebuild with Release|x64 and FinalRelease=true." />
+  </Target>
+  <Target Name="AssembleFinalReleasePackage">
+    <Error Text="AssembleFinalReleasePackage cannot publish a pre-existing output. Invoke Build or Rebuild with Release|x64 and FinalRelease=true." />
+  </Target>
+  <Target Name="DeployToGame">
+    <Error Text="DeployToGame cannot deploy a pre-existing output. Invoke Build or Rebuild with Release|x64, FinalRelease=true, and DeployGameArtifacts=true." />
+  </Target>
+  <Target Name="WriteFinalReleaseIdentity">
+    <Error Text="WriteFinalReleaseIdentity cannot attest a pre-existing output. Invoke Build or Rebuild with Release|x64 and FinalRelease=true." />
+  </Target>
+  <Target Name="_ReleaseFinalBuildLock"
+          Condition="'$(FinalRelease)'=='true' and '$(Configuration)'=='Release' and '$(Platform)'=='x64'">
+    <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\Build-SPatchRelease.ps1&quot; -BuildLockAction Release -LockToken &quot;$(SPatchFinalBuildLockToken)&quot;" />
+  </Target>
+  <Target Name="_FinalizeCurrentFinalBuild"
+          AfterTargets="Build"
+          Condition="'$(FinalRelease)'=='true' and '$(Configuration)'=='Release' and '$(Platform)'=='x64'">
+    <ItemGroup>
+      <_FinalBuildAttestationLine Include="SPATCH_FINAL_BUILD=1" />
+      <_FinalBuildAttestationLine Include="INVOCATION_ID=$(SPatchFinalBuildInvocationId)" />
+      <_FinalBuildAttestationLine Include="CONFIGURATION=Release" />
+      <_FinalBuildAttestationLine Include="PLATFORM=x64" />
+      <_FinalBuildAttestationLine Include="FINAL_RELEASE=true" />
+      <_FinalBuildAttestationLine Include="PROJECT=SPatch.vcxproj" />
+      <_FinalBuildAttestationLine Include="ARTIFACT=build/Release/SPatch.asi" />
+      <_FinalBuildAttestationLine Include="BUILD_LOCK_TOKEN=$(SPatchFinalBuildLockToken)" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(FinalBuildAttestationPath)"
+                      Lines="@(_FinalBuildAttestationLine)"
+                      Overwrite="true"
+                      Encoding="UTF-8" />
+    <MSBuild Projects="$(ProjectDir)SPatchTests.vcxproj"
+             Targets="Rebuild"
+             RemoveProperties="OutDir;IntDir;TargetName;TargetExt;DeployGameArtifacts;GameDir"
+             Properties="Configuration=Release;Platform=x64;FinalRelease=false" />
+    <Exec Command="&quot;$(NormalTestsPath)&quot;" />
+    <MSBuild Projects="$(ProjectDir)SPatchTests.vcxproj"
+             Targets="Rebuild"
+             RemoveProperties="OutDir;IntDir;TargetName;TargetExt;DeployGameArtifacts;GameDir"
+             Properties="Configuration=Release;Platform=x64;FinalRelease=true" />
+    <Exec Command="&quot;$(FinalTestsPath)&quot;" />
+    <Delete Files="$(TargetDir)$(TargetName).pdb" />
+    <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\Build-SPatchRelease.ps1&quot; -ArtifactPath &quot;$(TargetPath)&quot; -NormalTestsPath &quot;$(NormalTestsPath)&quot; -FinalTestsPath &quot;$(FinalTestsPath)&quot; -BuildAttestationPath &quot;$(FinalBuildAttestationPath)&quot; -BuildInvocationId &quot;$(SPatchFinalBuildInvocationId)&quot; -BuildLockToken &quot;$(SPatchFinalBuildLockToken)&quot;" />
+    <Error Condition="!Exists('$(TargetDir)$(TargetName).final-release.sha256')"
+           Text="Snapshot-bound FinalRelease identity was not published: $(TargetDir)$(TargetName).final-release.sha256" />
+    <Message Condition="'$(DeployGameArtifacts)'=='true'"
+             Text="Deploying current attested $(TargetPath) to $(NormalizedGameDir)" Importance="high" />
+    <Exec Condition="'$(DeployGameArtifacts)'=='true'"
+          Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(ProjectDir)tools\Deploy-SPatchArtifact.ps1&quot; -ArtifactPath &quot;$(TargetPath)&quot; -FinalReleaseIdentityPath &quot;$(TargetDir)$(TargetName).final-release.sha256&quot; -GameRoot &quot;$(NormalizedGameDir).&quot; -BuildInfoPath &quot;$(ProjectDir)src\BuildInfo.h&quot; -AsiLoaderPath &quot;$(AsiLoaderPath)&quot;" />
+    <CallTarget Targets="_ReleaseFinalBuildLock" />
+    <OnError ExecuteTargets="_ReleaseFinalBuildLock" />
+  </Target>
+  <Target Name="ResolvePinnedMinHook" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(ProjectDir)tools\Resolve-MinHook.ps1')"
+           Text="Pinned SDmodding MinHook resolver is missing: $(ProjectDir)tools\Resolve-MinHook.ps1" />
+    <Exec Condition="'$(MinHookOffline)'!='true'"
+          Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\tools\Resolve-MinHook.ps1&quot; -RepoRoot &quot;$(MSBuildProjectDirectory)&quot; -MinHookRoot &quot;$(MinHookRoot)\.&quot; -Quiet" />
+    <Exec Condition="'$(MinHookOffline)'=='true'"
+          Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\tools\Resolve-MinHook.ps1&quot; -RepoRoot &quot;$(MSBuildProjectDirectory)&quot; -MinHookRoot &quot;$(MinHookRoot)\.&quot; -Offline -Quiet" />
+  </Target>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
