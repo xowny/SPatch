@@ -25,11 +25,6 @@
 - Hardened final-release builds, deterministic packaging, executable identity
   checks, deployment preflight, and rollback journaling.
 
-## 2026-08-08 — Crash-dump investigation
-
-- Documented the Main Pool allocation failure and stock breakpoint from the
-  submitted dump without adding a speculative allocator workaround.
-
 ## Earlier releases
 
 Earlier configuration migrations remain documented in the source history and
