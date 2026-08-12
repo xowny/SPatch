@@ -1,8 +1,7 @@
 # SPatch
 
-SPatch is a native x64 ASI patch for **Sleeping Dogs: Definitive Edition**.
-It applies verified executable fixes, timing and input corrections, native
-texture filtering, SMAA, diagnostics, and configuration migration.
+SPatch is an ASI patch for **Sleeping Dogs: Definitive Edition**.
+It applies executable fixes, timing and input corrections,, SMAA, diagnostics, and configuration migration, among other features.
 
 This repository contains SPatch source code only.
 
@@ -27,7 +26,7 @@ needed. Configuration migration backups live under
 
 ## Included fixes
 
-- known-build verification, fail-closed gating, and transactional patching;
+- build verification, fail-closed gating, and transactional patching;
 - cutscene/NIS timing recovery for arbitrary configured cadences;
 - display-setting persistence and removal of the hidden 120 FPS wait;
 - native fog, eye-material, wetness, sweat, shadow-filter, and VRAM fixes;
