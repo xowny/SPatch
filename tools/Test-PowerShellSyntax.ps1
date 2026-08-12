@@ -8,8 +8,7 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = [IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
 $roots = @(
-    (Join-Path $repoRoot 'tools'),
-    (Join-Path $repoRoot 'luma')
+    (Join-Path $repoRoot 'tools')
 )
 $files = @($roots | ForEach-Object {
         Get-ChildItem -LiteralPath $_ -File -Recurse -Force |

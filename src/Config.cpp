@@ -284,7 +284,7 @@ std::optional<std::wstring> ReadRawValue(const std::filesystem::path& path,
     return std::wstring(buffer, length);
 }
 
-bool HasMigratedShenLongSettings(const std::filesystem::path& path) {
+bool HasMigratedRetiredRendererSettings(const std::filesystem::path& path) {
     const auto has_any = [&](const auto& sections, const auto& keys) {
         for (const wchar_t* section : sections) {
             for (const wchar_t* key : keys) {
@@ -1507,7 +1507,8 @@ Config LoadConfig(const std::filesystem::path& path, ConfigLoadReport* report) {
     }
 
     const bool obsolete_pcss_keys = HasRetiredPcssSettings(path);
-    const bool migrated_shenlong_keys = HasMigratedShenLongSettings(path);
+    const bool migrated_retired_renderer_keys =
+        HasMigratedRetiredRendererSettings(path);
     const bool obsolete_logging_keys = HasRetiredLoggingSettings(path);
     const bool obsolete_crash_dump_location =
         HasRetiredCrashDumpLocation(path);
@@ -1519,7 +1520,7 @@ Config LoadConfig(const std::filesystem::path& path, ConfigLoadReport* report) {
         HasRetiredVisualDamageSettings(path);
     if (config_version < kConfigVersion ||
         obsolete_pcss_keys ||
-        migrated_shenlong_keys ||
+        migrated_retired_renderer_keys ||
         obsolete_logging_keys ||
         obsolete_crash_dump_location ||
         obsolete_texture_filtering_location ||
@@ -1663,7 +1664,7 @@ Config LoadConfig(const std::filesystem::path& path, ConfigLoadReport* report) {
         load_report.persistence != ConfigPersistenceStatus::SourceUnavailable &&
         (config_version < kConfigVersion ||
          obsolete_pcss_keys ||
-         migrated_shenlong_keys ||
+         migrated_retired_renderer_keys ||
          obsolete_logging_keys ||
          obsolete_crash_dump_location ||
          obsolete_texture_filtering_location ||

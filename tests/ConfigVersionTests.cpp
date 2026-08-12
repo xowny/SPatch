@@ -1455,7 +1455,7 @@ int main(int argc, char* argv[]) {
                         InGameLegacyConfigBackupPath(path)),
                 "v44 defaults should expose independent default-off GTA IV "
                 "car and bike cameras, keep "
-                "native texture filtering, exclude ShenLong rendering controls, "
+                "native texture filtering, exclude retired rendering controls, "
                 "and end exactly with the crash dump switch")) {
             return EXIT_FAILURE;
         }
@@ -1945,7 +1945,7 @@ int main(int argc, char* argv[]) {
                                 InGameLegacyConfigBackupPath(path)) &&
                             reload_report.persistence ==
                                 ConfigPersistenceStatus::Unchanged,
-                        "every exact migrated ShenLong key should preserve the source bytes "
+                        "every exact migrated renderer key should preserve the source bytes "
                         "outside the game directory and be removed by the v42 rewrite")) {
                 return EXIT_FAILURE;
             }

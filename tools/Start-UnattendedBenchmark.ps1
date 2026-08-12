@@ -454,7 +454,7 @@ while ((Get-Date) -lt $startupDeadline) {
         throw ("The direct unattended benchmark exited during its " +
             "$GameStartupValidationSeconds-second startup validation with " +
             "code $($process.ExitCode). Steam was ready; check the game and " +
-            'SPatch/ReShade logs for the bootstrap failure.')
+            'SPatch logs for the bootstrap failure.')
     }
     if ($null -ne $shell -and $process.MainWindowHandle -ne 0) {
         # Keep asserting foreground ownership through bootstrap. Fast arms can

@@ -130,9 +130,8 @@ size `0xAC000`, and module timestamp `0x69BE3863`. No byte-identical local
 SPatch image with that identity was available during this analysis. The current
 installed and workspace builds have different image identities, so
 `SPatch.asi+0x12122` cannot be responsibly symbolized or compared with current
-source. The dump also contains `LotusPatch.asi`, the Steam overlay, ReShade is
-not listed, and NVIDIA user-mode driver modules. None is singled out by the
-failing allocator stack.
+source. The dump also contains `LotusPatch.asi`, the Steam overlay, and NVIDIA
+user-mode driver modules. None is singled out by the failing allocator stack.
 
 The small dump does not include enough heap/pool state to determine:
 

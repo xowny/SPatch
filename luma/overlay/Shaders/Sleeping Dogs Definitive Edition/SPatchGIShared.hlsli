@@ -1,3 +1,0 @@
-#ifndef SPATCH_GI_MAX_TRACE_MIP
-#define SPATCH_GI_MAX_TRACE_MIP 4
-#endif
