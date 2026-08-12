@@ -1,55 +1,8 @@
 # SPatch
 
 SPatch is a known-build `.asi` patch for **Sleeping Dogs: Definitive Edition**.
-The release configuration keeps the normal game path quiet and leaves internal
-reverse-engineering probes out of the shipped end-user configuration.
-SPatch is process-lifetime software; hot unloading/reloading the ASI while the
-game is running is unsupported.
 
-SPatch owns executable fixes and non-renderer tweaks, including its native
-texture-filtering controls. The optional AgX, shadow-map scaling, AO, GI, PBR,
-SSS, material-scattering, and water renderer features are supplied by the
-independent `ShenLong.asi` companion and configured in `ShenLong.ini`; they are
-not SPatch hooks or `SPatch.ini` keys.
-
-## Installation and uninstall
-
-SPatch is a native x64 ASI and requires a compatible **x64** ASI loader. The
-base release deliberately does not bundle or silently replace a loader. Install
-an x64 `dinput8.dll` ASI loader beside `sdhdship.exe` first; an x86 loader cannot
-load SPatch. The supported game executables have these SHA-256 identities:
-
-- legacy/full-feature build:
-  `C6DB199B7692D24231C216FC29DC430EC3AFD59435AD5C1AC589934BE8CC6035`;
-- latest Steam build:
-  `2A33EC787AC6FD4C86FEC2B6F778FEEA881A3F35EA56C680121F53571C0527DA`.
-
-The legacy identity is the fully mapped, full-feature target. The latest-Steam
-compatibility profile intentionally disables `RestoreSweat`,
-`FixDuplicateCutsceneActorRestore`, the rumble override, SMAA, and internal
-probes whose latest-build paths are not fully mapped. Latest-build support has
-static identity/signature and unit coverage only in this release; no live
-latest-build runtime smoke or full-feature parity is claimed.
-
-Extract the contents of `SPatch-Base.zip` into the Sleeping Dogs: Definitive
-Edition directory containing `sdhdship.exe`. Keep `SPatch.asi` and the supplied
-configuration-v44 `SPatch.ini` beside the executable. `README.md`,
-`THIRD_PARTY_NOTICES.md`, `licenses`, and `SHA256SUMS.txt` are release records
-and may remain in that directory. When its renderer features are wanted, extract
-the separately validated ShenLong archive outside the game directory and run
-the installer from its `ShenLong-Package` folder.
-
-To uninstall the base patch, remove `SPatch.asi`. Remove `SPatch.ini`,
-`SPatch.log`, and `SPatch-*.dmp` only if their user configuration or diagnostics
-are no longer wanted. Versioned migration backups are stored outside the game
-directory under `%LOCALAPPDATA%\SPatch\ConfigBackups`; remove them separately
-only when rollback is no longer wanted. Uninstall the separate
-graphics package by removing `ShenLong.asi`, `ShenLong.ini`,
-`ShenLong-SHA256SUMS.txt`, and the `ShenLong` directory. Delete the shared
-`dxgi.dll`, `ReShade.ini`, or ReShade logs only when no other add-on uses them.
-Do not delete a shared ASI loader unless no other installed ASI uses it.
-
-Stable features include:
+- Features:
 
 - the cutscene/NIS zero-tick fix, with state-aware scene-time recovery;
 - arbitrary expected cutscene cadences (`30`, `60`, `90`, `120`, `144`, `165`,
