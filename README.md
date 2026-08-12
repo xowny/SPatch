@@ -4,7 +4,9 @@ SPatch is a native x64 ASI patch for **Sleeping Dogs: Definitive Edition**.
 It applies verified executable fixes, timing and input corrections, native
 texture filtering, SMAA, diagnostics, and configuration migration.
 
-This repository contains SPatch only.
+This repository contains SPatch source code only.
+
+- Nexus Mods: https://www.nexusmods.com/sleepingdogsdefinitiveedition/mods/148?tab=description
 
 ## Install
 
