@@ -24,7 +24,7 @@ and `SPatch-*.dmp` only when their settings and diagnostics are no longer
 needed. Configuration migration backups live under
 `%LOCALAPPDATA%\SPatch\ConfigBackups`.
 
-## Included fixes
+## Included tweaks
 
 - build verification, fail-closed gating, and transactional patching;
 - cutscene/NIS timing recovery for arbitrary configured cadences;
