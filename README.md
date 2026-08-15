@@ -44,7 +44,7 @@ sections include:
 - `[Cutscenes]` for cadence and scene-time recovery;
 - `[Display]` for first-run resolution and refresh behavior;
 - `[Input]` for raw mouse input, controller deadzones, and vehicle cameras;
-- `[TextureFiltering]` for native anisotropic filtering;
+- `[TextureFiltering]` for anisotropic filtering tweaks;
 - `[AntiAliasing]` for SMAA;
 - `[Stability]` for file, resource, save, and thread guards;
 - `[Debug]` for local logging and crash dumps.
