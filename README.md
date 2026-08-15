@@ -29,7 +29,7 @@ needed. Configuration migration backups live under
 - build verification, fail-closed gating, and transactional patching;
 - cutscene/NIS timing recovery for arbitrary configured cadences;
 - display-setting persistence and removal of the hidden 120 FPS wait;
-- native fog, eye-material, wetness, sweat, shadow-filter, and VRAM fixes;
+- original version fog, eye-material, wetness, sweat, shadow-filter, and VRAM fixes;
 - file, archive, QCMP, compressed-XML, resource-stream, and save-safety guards;
 - native Windows Raw Input, controller deadzones, and opt-in vehicle cameras;
 - native texture-filtering controls and canonical SMAA 1x;
@@ -73,8 +73,3 @@ $msbuild = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild 
 The project validates the pinned MinHook and SMAA inputs during the build.
 Normal builds write only under `build\`; release packaging writes under
 `artifacts\`.
-
-## Documentation
-
-- [Texture-filtering paired analysis](docs/2026-08-10-texture-filtering-paired-analysis.md)
-- [Changelog](CHANGELOG.md)
