@@ -27,7 +27,6 @@ needed. Configuration migration backups live under
 
 ## Included tweaks
 
-- build verification, fail-closed gating, and transactional patching;
 - cutscene/NIS timing recovery for arbitrary configured cadences;
 - display-setting persistence and removal of the hidden 120 FPS wait;
 - original version fog, eye-material, wetness, sweat, shadow-filter, and VRAM fixes;
