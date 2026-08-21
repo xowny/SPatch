@@ -2,7 +2,7 @@
 
 SPatch is an ASI mod for **Sleeping Dogs: Definitive Edition**.
 
-![image alt](https://raw.githubusercontent.com/xowny/SPatch/refs/heads/main/cG6vs4z.png)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 This repository contains SPatch source code only.
 
