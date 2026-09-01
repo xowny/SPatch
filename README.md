@@ -1,3 +1,5 @@
+
+
 # SPatch
 
 SPatch is an ASI mod for **Sleeping Dogs: Definitive Edition**.
@@ -70,6 +72,6 @@ $msbuild = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild 
     /p:Platform=x64 /p:FinalRelease=true
 ```
 
-The project validates the pinned MinHook and SMAA inputs during the build.
+The project validates the pinned `MinHook.h` and `SearchTex.h` inputs during the build.
 Normal builds write only under `build\`; release packaging writes under
 `artifacts\`.
